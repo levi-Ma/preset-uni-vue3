@@ -1,0 +1,62 @@
+{
+	"easycom": {
+		"^u-(.*)": "./uni_modules/vk-uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [
+		{
+			"path": "pages/home",
+			"style": {
+				"navigationBarTitleText": "uViewUi"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#4A4A4F",
+		"selectedColor": "red",
+		"backgroundColor": "#FFFFFF",
+		"list": [
+			{
+				"pagePath": "pages/home",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pakeage-poster/index",
+				"text": "海报页"
+			},
+			{
+				"pagePath": "pakeage-pinia/index",
+				"text": "Pinia"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"subPackages": [
+		{
+			"root": "pakeage-poster",
+			"pages": [
+				{
+					"path": "index",
+					"style": {
+						"navigationBarTitleText": "海报页"
+					}
+				}
+			]
+		},
+		{
+			"root": "pakeage-pinia",
+			"pages": [
+				{
+					"path": "index",
+					"style": {
+						"navigationBarTitleText": "Pinia简单使用"
+					}
+				}
+			]
+		}
+	]
+}

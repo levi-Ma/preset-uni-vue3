@@ -1,0 +1,170 @@
+/* 混入 方法 */
+// 用于在网格布局中指定列
+@mixin grid-columns($clamp) {
+  grid-template-columns: repeat($clamp, minmax(0, 1fr));
+}
+
+// 用于在网格布局中指定行
+@mixin grid-rows($clamp) {
+  grid-template-rows: repeat($clamp, minmax(0, 1fr));
+}
+
+// 文字溢出处理(一行) 
+@mixin text-ellipsis($width) {
+  max-width: $width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 文字溢出处理(多行) 
+@mixin text-hidden-line ($line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+}
+
+/* 基本样式初始化 */
+image {
+  display: block;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+button.clear {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+
+  &::after {
+    display: none;
+  }
+}
+
+/* 引用与 [tailwind](https://www.tailwindcss.cn/docs) */
+/* 可根据需要另行添加或删除 */
+/* 定位 */
+.relative {
+  position: relative;
+}
+
+
+/* flex布局 */
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+// 自适应剩余空间
+.flex-width {
+  flex: 1;
+  min-width: 0;
+}
+
+.flex-height {
+  flex: 1;
+  min-height: 0;
+}
+
+// 自动换行
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+// 让元素沿着容器主轴的中心点和交叉轴中心对齐
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+// 沿垂直方向放置 flex 子项
+.flex-col {
+  flex-direction: column;
+}
+
+// 让元素沿着容器主轴排列，并使每个元素之间的距离相等
+.justify-between {
+  justify-content: space-between;
+}
+
+// 让元素沿着容器主轴的中心点对齐
+.justify-center {
+  justify-content: center;
+}
+
+// 让元素沿着容器主轴排列，并使每个元素两侧的距离相等。
+.justify-around {
+  justify-content: space-around;
+}
+
+// 将元素沿着容器交叉轴的起点对齐
+.items-start {
+  align-items: flex-start;
+}
+
+// 将元素沿着容器交叉轴的终点对齐
+.items-end {
+  align-items: flex-end;
+}
+
+// 沿着容器的交叉轴中心对齐元素
+.items-center {
+  align-items: center;
+}
+
+// flex 子项外边距
+.mt-a {
+  margin-top: auto;
+}
+
+.ml-a {
+  margin-left: auto;
+}
+
+// grid
+.grid {
+  display: grid;
+}
+
+// 用于在网格布局中指定列 
+.grid-cols-1 {
+  @include grid-columns(1);
+}
+
+.grid-cols-2 {
+  @include grid-columns(2);
+}
+
+.grid-cols-3 {
+  @include grid-columns(3);
+}
+
+.grid-cols-4 {
+  @include grid-columns(4);
+}
+
+// 用于在网格布局中指定行 
+.grid-rows-1 {
+  @include grid-rows(1);
+}
+
+.grid-rows-2 {
+  @include grid-rows(2);
+}
+
+.grid-rows-3 {
+  @include grid-rows(3);
+}
+
+.grid-rows-4 {
+  @include grid-rows(4);
+}

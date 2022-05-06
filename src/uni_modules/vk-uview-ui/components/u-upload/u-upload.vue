@@ -97,8 +97,8 @@
  * @example <u-upload :action="action" :file-list="fileList" ></u-upload>
  */
 export default {
-	name: 'u-upload',
-  emits: ["on-oversize", "on-list-change", "on-preview", "on-remove", "on-success", "on-change", "on-error", "on-progress", "on-uploaded", "on-choose-complete"],
+	name: "u-upload",
+	emits: ["on-oversize", "on-list-change", "on-preview", "on-remove", "on-success", "on-change", "on-error", "on-progress", "on-uploaded", "on-choose-complete"],
 	props: {
 		//是否显示组件自带的图片预览功能
 		showUploadList: {
@@ -108,7 +108,7 @@ export default {
 		// 后端地址
 		action: {
 			type: String,
-			default: ''
+			default: ""
 		},
 		// 最大上传数量
 		maxCount: {
@@ -128,7 +128,7 @@ export default {
 		// 预览上传的图片时的裁剪模式，和image组件mode属性一致
 		imageMode: {
 			type: String,
-			default: 'aspectFill'
+			default: "aspectFill"
 		},
 		// 头部信息
 		header: {
@@ -147,19 +147,19 @@ export default {
 		// 上传的文件字段名
 		name: {
 			type: String,
-			default: 'file'
+			default: "file"
 		},
 		// 所选的图片的尺寸, 可选值为original compressed
 		sizeType: {
 			type: Array,
 			default() {
-				return ['original', 'compressed'];
+				return ["original", "compressed"];
 			}
 		},
 		sourceType: {
 			type: Array,
 			default() {
-				return ['album', 'camera'];
+				return ["album", "camera"];
 			}
 		},
 		// 是否在点击预览图后展示全屏图片预览
@@ -192,7 +192,7 @@ export default {
 		// 上传区域的提示文字
 		uploadText: {
 			type: String,
-			default: '选择图片'
+			default: "选择图片"
 		},
 		// 是否自动上传
 		autoUpload: {
@@ -222,27 +222,27 @@ export default {
 		// 右上角关闭按钮的背景颜色
 		delBgColor: {
 			type: String,
-			default: '#fa3534'
+			default: "#fa3534"
 		},
 		// 右上角关闭按钮的叉号图标的颜色
 		delColor: {
 			type: String,
-			default: '#ffffff'
+			default: "#ffffff"
 		},
 		// 右上角删除图标名称，只能为uView内置图标
 		delIcon: {
 			type: String,
-			default: 'close'
+			default: "close"
 		},
 		// 右下角成功图标名称，只能为uView内置图标
 		successIcon: {
 			type: String,
-			default: 'checkbox-mark'
+			default: "checkbox-mark"
 		},
 		// 右下角成功的叉号图标的颜色
 		successColor: {
 			type: String,
-			default: '#ffffff'
+			default: "#ffffff"
 		},
 		// 如果上传后的返回值为json字符串，是否自动转json
 		toJson: {
@@ -260,18 +260,18 @@ export default {
 			default: null
 		},
 		// 允许上传的图片后缀
-		limitType:{
+		limitType: {
 			type: Array,
 			default() {
 				// 支付宝小程序真机选择图片的后缀为"image"
 				// https://opendocs.alipay.com/mini/api/media-image
-				return ['png', 'jpg', 'jpeg', 'webp', 'gif', 'image'];
+				return ["png", "jpg", "jpeg", "webp", "gif", "image"];
 			}
 		},
 		// 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件
 		index: {
 			type: [Number, String],
-			default: ''
+			default: ""
 		}
 	},
 	mounted() {},
@@ -294,9 +294,9 @@ export default {
 					// 数组的some方法意思是，只要数组元素有任意一个元素条件符合，就返回true，而另一个数组的every方法的意思是数组所有元素都符合条件才返回true
 					let tmp = lists.some(val => {
 						return val.url == value.url;
-					})
+					});
 					// 如果内部没有这个图片(tmp为false)，则添加到内部
-					if(!tmp){
+					if (!tmp) {
 						lists.push({ url: value.url, error: false, progress: 100 });
 					}
 				});
@@ -305,7 +305,7 @@ export default {
 		},
 		// 监听lists的变化，发出事件
 		lists(n) {
-			this.$emit('on-list-change', n, this.index);
+			this.$emit("on-list-change", n, this.index);
 		}
 	},
 	methods: {
@@ -321,7 +321,7 @@ export default {
 		selectFile() {
 			let that = this;
 			if (that.disabled) return;
-			const { name = '', maxCount, multiple, maxSize, sizeType, camera, compressed, maxDuration, sourceType } = that;
+			const { name = "", maxCount, multiple, maxSize, sizeType, camera, compressed, maxDuration, sourceType } = that;
 			let chooseFile = null;
 			let lists = JSON.parse(JSON.stringify(that.lists));
 			const newMaxCount = maxCount - lists.length;
@@ -341,17 +341,17 @@ export default {
 					let listOldLength = that.lists.length;
 					res.tempFiles.map((val, index) => {
 						// 检查文件后缀是否允许，如果不在that.limitType内，就会返回false
-						if(!that.checkFileExt(val)) return ;
-						
+						if (!that.checkFileExt(val)) return;
+
 						// 如果是非多选，index大于等于1或者超出最大限制数量时，不处理
 						if (!multiple && index >= 1) return;
 						if (val.size > maxSize) {
-							that.$emit('on-oversize', val, that.lists, that.index);
-							that.showToast('超出允许的文件大小');
+							that.$emit("on-oversize", val, that.lists, that.index);
+							that.showToast("超出允许的文件大小");
 						} else {
 							if (maxCount <= lists.length) {
-								that.$emit('on-exceed', val, that.lists, that.index);
-								that.showToast('超出最大允许的文件个数');
+								that.$emit("on-exceed", val, that.lists, that.index);
+								that.showToast("超出最大允许的文件个数");
 								return;
 							}
 							lists.push({
@@ -362,13 +362,16 @@ export default {
 							});
 						}
 					});
-					that.lists = JSON.parse(JSON.stringify(lists));
+
+					// 这样实现深拷贝会导致在H5中file为空对象
+					// that.lists = JSON.parse(JSON.stringify(lists));
+					this.deepClone(lists, that.lists);
 					// 每次图片选择完，抛出一个事件，并将当前内部选择的图片数组抛出去
-					that.$emit('on-choose-complete', that.lists, that.index);
+					that.$emit("on-choose-complete", that.lists, that.index);
 					if (that.autoUpload) that.uploadFile(listOldLength);
 				})
 				.catch(error => {
-					that.$emit('on-choose-fail', error);
+					that.$emit("on-choose-fail", error);
 				});
 		},
 		// 提示用户消息
@@ -376,7 +379,7 @@ export default {
 			if (this.showTips || force) {
 				uni.showToast({
 					title: message,
-					icon: 'none'
+					icon: "none"
 				});
 			}
 		},
@@ -390,7 +393,7 @@ export default {
 			this.lists[index].error = false;
 			this.lists[index].response = null;
 			uni.showLoading({
-				title: '重新上传'
+				title: "重新上传"
 			});
 			this.uploadFile(index);
 		},
@@ -400,7 +403,7 @@ export default {
 			if (this.uploading) return;
 			// 全部上传完成
 			if (index >= this.lists.length) {
-				this.$emit('on-uploaded', this.lists, this.index);
+				this.$emit("on-uploaded", this.lists, this.index);
 				return;
 			}
 			// 检查是否是已上传或者正在上传中
@@ -409,7 +412,7 @@ export default {
 				return;
 			}
 			// 执行before-upload钩子
-			if(this.beforeUpload && typeof(this.beforeUpload) === 'function') {
+			if (this.beforeUpload && typeof this.beforeUpload === "function") {
 				// 执行回调，同时传入索引和文件列表当作参数
 				// 在微信，支付宝等环境(H5正常)，会导致父组件定义的customBack()函数体中的this变成子组件的this
 				// 通过bind()方法，绑定父组件的this，让this.customBack()的this为父组件的上下文
@@ -418,14 +421,16 @@ export default {
 				// 明白意思即可，无需纠结this.$u.$parent.call(this)的细节
 				let beforeResponse = this.beforeUpload.bind(this.$u.$parent.call(this))(index, this.lists);
 				// 判断是否返回了promise
-				if (!!beforeResponse && typeof beforeResponse.then === 'function') {
-					await beforeResponse.then(res => {
-						// promise返回成功，不进行动作，继续上传
-					}).catch(err => {
-						// 进入catch回调的话，继续下一张
-						return this.uploadFile(index + 1);
-					})
-				} else if(beforeResponse === false) {
+				if (!!beforeResponse && typeof beforeResponse.then === "function") {
+					await beforeResponse
+						.then(res => {
+							// promise返回成功，不进行动作，继续上传
+						})
+						.catch(err => {
+							// 进入catch回调的话，继续下一张
+							return this.uploadFile(index + 1);
+						});
+				} else if (beforeResponse === false) {
 					// 如果返回false，继续下一张图片的上传
 					return this.uploadFile(index + 1);
 				} else {
@@ -434,7 +439,7 @@ export default {
 			}
 			// 检查上传地址
 			if (!this.action) {
-				this.showToast('请配置上传地址', true);
+				this.showToast("请配置上传地址", true);
 				return;
 			}
 			this.lists[index].error = false;
@@ -456,7 +461,7 @@ export default {
 						this.lists[index].response = data;
 						this.lists[index].progress = 100;
 						this.lists[index].error = false;
-						this.$emit('on-success', data, index, this.lists, this.index);
+						this.$emit("on-success", data, index, this.lists, this.index);
 					}
 				},
 				fail: e => {
@@ -466,13 +471,13 @@ export default {
 					uni.hideLoading();
 					this.uploading = false;
 					this.uploadFile(index + 1);
-					this.$emit('on-change', res, index, this.lists, this.index);
+					this.$emit("on-change", res, index, this.lists, this.index);
 				}
 			});
 			task.onProgressUpdate(res => {
 				if (res.progress > 0) {
 					this.lists[index].progress = res.progress;
-					this.$emit('on-progress', res, index, this.lists, this.index);
+					this.$emit("on-progress", res, index, this.lists, this.index);
 				}
 			});
 		},
@@ -481,33 +486,35 @@ export default {
 			this.lists[index].progress = 0;
 			this.lists[index].error = true;
 			this.lists[index].response = null;
-			this.$emit('on-error', err, index, this.lists, this.index);
-			this.showToast('上传失败，请重试');
+			this.$emit("on-error", err, index, this.lists, this.index);
+			this.showToast("上传失败，请重试");
 		},
 		// 删除一个图片
 		deleteItem(index) {
 			uni.showModal({
-				title: '提示',
-				content: '您确定要删除此项吗？',
-				success: async (res) => {
+				title: "提示",
+				content: "您确定要删除此项吗？",
+				success: async res => {
 					if (res.confirm) {
 						// 先检查是否有定义before-remove移除前钩子
 						// 执行before-remove钩子
-						if(this.beforeRemove && typeof(this.beforeRemove) === 'function') {
+						if (this.beforeRemove && typeof this.beforeRemove === "function") {
 							// 此处钩子执行 原理同before-remove参数，见上方注释
 							let beforeResponse = this.beforeRemove.bind(this.$u.$parent.call(this))(index, this.lists);
 							// 判断是否返回了promise
-							if (!!beforeResponse && typeof beforeResponse.then === 'function') {
-								await beforeResponse.then(res => {
-									// promise返回成功，不进行动作，继续上传
-									this.handlerDeleteItem(index);
-								}).catch(err => {
-									// 如果进入promise的reject，终止删除操作
-									this.showToast('已终止移除');
-								})
-							} else if(beforeResponse === false) {
+							if (!!beforeResponse && typeof beforeResponse.then === "function") {
+								await beforeResponse
+									.then(res => {
+										// promise返回成功，不进行动作，继续上传
+										this.handlerDeleteItem(index);
+									})
+									.catch(err => {
+										// 如果进入promise的reject，终止删除操作
+										this.showToast("已终止移除");
+									});
+							} else if (beforeResponse === false) {
 								// 返回false，终止删除
-								this.showToast('已终止移除');
+								this.showToast("已终止移除");
 							} else {
 								// 如果返回true，执行删除操作
 								this.handlerDeleteItem(index);
@@ -524,11 +531,11 @@ export default {
 		handlerDeleteItem(index) {
 			// 如果文件正在上传中，终止上传任务，进度在0 < progress < 100则意味着正在上传
 			if (this.lists[index].process < 100 && this.lists[index].process > 0) {
-				typeof this.lists[index].uploadTask != 'undefined' && this.lists[index].uploadTask.abort();
+				typeof this.lists[index].uploadTask != "undefined" && this.lists[index].uploadTask.abort();
 			}
 			this.lists.splice(index, 1);
 			this.$forceUpdate();
-			this.$emit('on-remove', index, this.lists, this.index);
+			this.$emit("on-remove", index, this.lists, this.index);
 			//this.showToast('移除成功');
 		},
 		// 用户通过ref手动的形式，移除一张图片
@@ -536,26 +543,26 @@ export default {
 			// 判断索引的合法范围
 			if (index >= 0 && index < this.lists.length) {
 				this.lists.splice(index, 1);
-				this.$emit('on-list-change', this.lists, this.index);
+				this.$emit("on-list-change", this.lists, this.index);
 			}
 		},
 		// 预览图片
 		doPreviewImage(url, index) {
-			if (!this.previewFullImage){
-				this.$emit('on-preview', url, this.lists, this.index);
+			if (!this.previewFullImage) {
+				this.$emit("on-preview", url, this.lists, this.index);
 				return;
-			} 
+			}
 			const images = this.lists.map(item => item.url || item.path);
 			uni.previewImage({
 				urls: images,
 				current: url,
 				success: () => {
-					this.$emit('on-preview', url, this.lists, this.index);
+					this.$emit("on-preview", url, this.lists, this.index);
 				},
 				fail: () => {
 					uni.showToast({
-						title: '预览图片失败',
-						icon: 'none'
+						title: "预览图片失败",
+						icon: "none"
 					});
 				}
 			});
@@ -565,7 +572,7 @@ export default {
 			// 检查是否在允许的后缀中
 			let noArrowExt = false;
 			// 获取后缀名
-			let fileExt = '';
+			let fileExt = "";
 			const reg = /.+\./;
 			// 如果是H5，需要从name中判断
 			// #ifdef H5
@@ -579,16 +586,32 @@ export default {
 			noArrowExt = this.limitType.some(ext => {
 				// 转为小写
 				return ext.toLowerCase() === fileExt;
-			})
-			if(!noArrowExt) this.showToast(`不允许选择${fileExt}格式的文件`);
+			});
+			if (!noArrowExt) this.showToast(`不允许选择${fileExt}格式的文件`);
 			return noArrowExt;
+		},
+		// 深拷贝
+		deepClone(obj, newObj) {
+			for (let k in obj) {
+				const value = obj[k];
+
+				if (Array.isArray(value)) {
+					newObj[k] = [];
+					this.deepClone(value, newObj[k]);
+				} else if (value !== null && typeof value === "object") {
+					newObj[k] = {};
+					this.deepClone(value, newObj[k]);
+				} else {
+					newObj[k] = value;
+				}
+			}
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../libs/css/style.components.scss';
+@import "../../libs/css/style.components.scss";
 
 .u-upload {
 	@include vue-flex;
@@ -657,7 +680,7 @@ export default {
 	justify-content: center;
 }
 
-.u-success-icon{
+.u-success-icon {
 	position: absolute;
 	bottom: 6rpx;
 	right: 6rpx;

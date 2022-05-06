@@ -23,7 +23,7 @@
 * * 3.3、还有其他一些细微变动（这个版本是几个月前就已经改造完的，在 uniapp 刚出Vue3的时候就开始了，但是由于当时的 uniapp Vue3 bug真的太多，当时并没有发布，可以想象一下作者当时碰到bug满天飞的场景）
 * * 3.4、Vue3.0中， uniapp 的 Vue3 版本在H5 APP（非nvue）微信小程序 中兼容性尚可，其他小程序目前还不行。
 
-> 组件属性没有更改，文档直接看 `uview-ui 1.0` 文档即可。 [uview-ui 1.0文档](https://v1.uviewui.com/components/icon.html)
+> [vk-uview-ui文档](https://vkuviewdoc.fsq.pub/components/icon.html)
 
 ___目前大的问题应该没有了，作者自己的项目也是用此组件库开发，因此你无需担心后期无人维护。___
 

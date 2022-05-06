@@ -201,7 +201,7 @@
 					});
 				}
 			},
-      value: {
+      valueCom: {
         immediate: true,
         handler(nVal, oVal) {
         	// 视图更新后再执行移动操作
@@ -210,19 +210,18 @@
         		this.scrollByIndex();
         	});
         }
-      },
-      modelValue: {
-        immediate: true,
-        handler(nVal, oVal) {
-        	// 视图更新后再执行移动操作
-        	this.$nextTick(() => {
-        		this.currentIndex = nVal;
-        		this.scrollByIndex();
-        	});
-        }
-      },
+      }
 		},
 		computed: {
+			valueCom() {
+				// #ifndef VUE3
+				return this.value;
+				// #endif
+			
+				// #ifdef VUE3
+				return this.modelValue;
+				// #endif
+			},
 			// 移动bar的样式
 			tabBarStyle() {
 				let style = {
@@ -264,15 +263,6 @@
 			}
 		},
 		methods: {
-      getValue(){
-        // #ifndef VUE3
-        return this.value;
-        // #endif
-        
-        // #ifdef VUE3
-        return this.modelValue;
-        // #endif
-      },
 			// 设置一个init方法，方便多处调用
 			async init() {
 				// 获取tabs组件的尺寸信息

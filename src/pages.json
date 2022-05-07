@@ -8,24 +8,43 @@
 			"style": {
 				"navigationBarTitleText": "uViewUi"
 			}
+		},
+		{
+			"path": "pages/pinia",
+			"style": {
+				"navigationBarTitleText": "Pinia简单使用/hooks"
+			}
+		},
+		{
+			"path": "pages/poster",
+			"style": {
+				"navigationBarTitleText": "海报页"
+			}
 		}
 	],
 	"tabBar": {
 		"color": "#4A4A4F",
 		"selectedColor": "red",
 		"backgroundColor": "#FFFFFF",
+		"fontSize": "14px",
 		"list": [
 			{
+				"iconPath": "./static/tabbar/home.png",
+				"selectedIconPath": "./static/tabbar/home_1.png",
 				"pagePath": "pages/home",
 				"text": "首页"
 			},
 			{
-				"pagePath": "pakeage-poster/index",
+				"iconPath": "./static/tabbar/message.png",
+				"selectedIconPath": "./static/tabbar/message_1.png",
+				"pagePath": "pages/poster",
 				"text": "海报页"
 			},
 			{
-				"pagePath": "pakeage-pinia/index",
-				"text": "Pinia"
+				"iconPath": "./static/tabbar/pinia.png",
+				"selectedIconPath": "./static/tabbar/pinia.png",
+				"pagePath": "pages/pinia",
+				"text": "其他"
 			}
 		]
 	},
@@ -40,9 +59,15 @@
 			"root": "pakeage-poster",
 			"pages": [
 				{
-					"path": "index",
+					"path": "pages/index",
 					"style": {
 						"navigationBarTitleText": "海报页"
+					}
+				},
+				{
+					"path": "pages/qrcode",
+					"style": {
+						"navigationBarTitleText": "二维码"
 					}
 				}
 			]
@@ -51,9 +76,26 @@
 			"root": "pakeage-pinia",
 			"pages": [
 				{
-					"path": "index",
+					"path": "pages/index",
 					"style": {
 						"navigationBarTitleText": "Pinia简单使用"
+					}
+				},
+				{
+					"path": "pages/hook",
+					"style": {
+						"navigationBarTitleText": "Composables"
+					}
+				}
+			]
+		},
+		{
+			"root": "pakeage-button",
+			"pages": [
+				{
+					"path": "pages/index",
+					"style": {
+						"navigationBarTitleText": "按钮组"
 					}
 				}
 			]

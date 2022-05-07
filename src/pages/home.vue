@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+  // 引入 api
+  import { ref } from 'vue'
+  import { navigateTo } from '@/utils'
+  import { useUser } from '@/composables/useUser'
+
+  const { loggedIn, user } = useUser()
+  const components = ref([{ id: 1, icon: 'grid-fill', title: '按钮组', pageUrl: '/pakeage-button/pages/index' }])
+</script>
+
 <template>
   <view class="header-container">
     <view class="header-wrap">
@@ -6,7 +16,7 @@
           <u-image height="100%" src="@/static/uview/logo.png"></u-image>
         </view>
         <view class="tit-box">
-          <view class="tit">uView UI</view>
+          <view class="tit">{{ !loggedIn ? 'uView UI' : user.username }}</view>
           <view class="txt">多平台快速开发的UI框架</view>
         </view>
       </view>
@@ -15,61 +25,11 @@
   </view>
 
   <view class="main-container">
-    <view class="btn" v-for="item in btns" :key="item.id">
-      <u-button :type="item.type" @click="handelShowTips(item)">{{ item.text }}</u-button>
-    </view>
+    <u-cell-group>
+      <u-cell-item v-for="item in components" :icon="item.icon" :title="item.title" :key="item.id" @click="navigateTo(item.pageUrl)"></u-cell-item>
+    </u-cell-group>
   </view>
-
-  <u-top-tips ref="uTips"></u-top-tips>
-  <u-toast ref="uToast"></u-toast>
 </template>
-
-<script lang="ts" setup>
-  // 引入 api
-  import { onMounted, ref } from 'vue'
-  import { onReady } from '@dcloudio/uni-app'
-  // 引入组件
-  import UToast from '../uni_modules/vk-uview-ui/components/u-toast/u-toast.vue'
-  // 引入类型
-  import { UTopTipsType, UToastType } from '../types/declares/uView-ui.d'
-  interface btnItem {
-    id: number
-    type: null | string
-    text: string
-  }
-
-  // 定义数据
-  const uTips = ref<UTopTipsType | null>()
-  const uToast = ref<UToastType | null>()
-  const btns = ref<btnItem[]>([
-    { id: 1, type: null, text: '默认按钮' },
-    { id: 2, type: 'primary', text: '主要按钮' },
-    { id: 3, type: 'success', text: '成功按钮' },
-    { id: 4, type: 'info', text: '信息按钮' },
-    { id: 5, type: 'warning', text: '警告按钮' },
-    { id: 6, type: 'error', text: '危险按钮' }
-  ])
-
-  // 方法
-  onReady(() => {})
-  onMounted(() => {})
-
-  const handelShowTips = (item: btnItem) => {
-    if (!item.type) {
-      uToast.value.show({
-        title: `${item.text}的消息提示`,
-        type: 'success ',
-        duration: 2000
-      })
-      return false
-    }
-    uTips.value.show({
-      title: `${item.text}的顶部提示`,
-      type: item.type,
-      duration: '2300'
-    })
-  }
-</script>
 
 <style lang="scss" scoped>
   .header-container {
@@ -106,8 +66,5 @@
   .main-container {
     padding: 0 30rpx;
     margin-top: 60rpx;
-    .btn {
-      margin-bottom: 20rpx;
-    }
   }
 </style>

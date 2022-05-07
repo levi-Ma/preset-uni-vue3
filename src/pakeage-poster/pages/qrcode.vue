@@ -2,23 +2,27 @@
   import { ref } from 'vue'
   import { onReady } from '@dcloudio/uni-app'
   import { useDrawPoster } from 'u-draw-poster'
-  import img1 from '@/static/poster/tp.png'
+  import drawQrCode, { errorCorrectLevel } from 'u-draw-poster/plugins/drawQrCode'
+  import { Canvas } from 'u-draw-poster/core/typed'
 
+  import { showToast } from '@/utils'
   const imgUrl = ref('')
 
   onReady(async () => {
     // 创建绘制工具
     const dp = await useDrawPoster('canvas', {
+      plugins: [drawQrCode()],
       loading: true,
-      debug: true,
+      debug: true, // 发布为正式版时关闭该选项
       width: 650,
       height: 920
     })
-    const w = dp.canvas.width
-    const h = dp.canvas.height
+    const canvas = <Canvas>dp.canvas
+    const w = canvas.width
+    const h = canvas.height
     // 绘制基本背景
     dp.draw((ctx) => {
-      ctx.fillStyle = '#ffffff'
+      ctx.fillStyle = '#f9f9f9'
       ctx.fillRoundRect(0, 0, w, h, 12)
       ctx.clip()
       ctx.fillStyle = '#E3712A'
@@ -32,11 +36,16 @@
     dp.draw(async (ctx) => {
       await Promise.all([
         ctx.drawImage('/static/poster/logo1.png', 20, 20, 35, 35),
-        ctx.drawImage(img1, 19, 86, 612, 459),
+        ctx.drawImage('/static/poster/tp.png', 19, 86, 612, 459),
         ctx.drawImage('/static/poster/bw.png', 188, 559, 274, 50)
       ])
       // 用户二维码
-      await ctx.drawRoundImage('/static/logo.png', 518, 780, 92, 92)
+      await ctx.drawQrCode({
+        x: 518,
+        y: 776,
+        text: 'http://www.baidu.com',
+        size: 90
+      })
       // 用户头像
       await ctx.drawRoundImage('/static/logo.png', 39, 790, 90, 90, 100)
     })
@@ -62,16 +71,35 @@
       ctx.font = '24px PingFang SC'
       ctx.fillText('邀请您一起聆听声音', 145, 866)
       ctx.font = '21px PingFang SC'
-      ctx.fillText('扫码聆听', 521, 895)
+      ctx.fillText('扫码聆听', 521, 896)
     })
     imgUrl.value = await dp.create()
   })
+
+  const handelSaveImg = () => {
+    uni.saveImageToPhotosAlbum({
+      filePath: imgUrl.value,
+      success: () => {
+        showToast({
+          title: 'success'
+        })
+      },
+      fail: () => {
+        showToast({
+          title: 'error'
+        })
+      }
+    })
+  }
 </script>
 
 <template>
   <div class="container">
     <image class="img" show-menu-by-longpress :src="imgUrl" />
-
+    <div @click="handelSaveImg" class="tip">
+      <u-icon name="fingerprint"></u-icon>
+      点击此处或长按图片保存到本地
+    </div>
     <div style="position: fixed; top: 999999999999999999999rpx">
       <!-- #ifdef MP-WEIXIN -->
       <canvas id="canvas" type="2d" style="width: 650px; height: 920px" />
@@ -93,5 +121,10 @@
     width: 650rpx;
     height: 920rpx;
     margin: 30rpx auto 0;
+  }
+  .tip {
+    display: flex;
+    justify-content: center;
+    margin-top: 30rpx;
   }
 </style>

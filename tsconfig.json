@@ -2,6 +2,10 @@
   "compilerOptions": {
     "target": "esnext",
     "allowJs": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "outDir": "./",
     "useDefineForClassFields": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -13,5 +17,6 @@
     "lib": ["esnext", "dom"],
     "types": ["@dcloudio/types"]
   },
+  "exclude": ["node_modules", "dist", "src/uni_modules"],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

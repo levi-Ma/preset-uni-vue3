@@ -1,7 +1,8 @@
 import { computed, ref } from 'vue'
 import { showToast } from '@/utils'
+import { useStorage } from '@/utils/useStorage'
 
-const user = ref(JSON.parse(uni.getStorageSync('user')))
+const user = useStorage('user', null)
 
 export const useUser = () => {
   const loginModel = ref({
@@ -13,13 +14,11 @@ export const useUser = () => {
 
   const login = async () => {
     user.value = { id: 1, username: loginModel.value.username }
-    uni.setStorageSync('user', JSON.stringify(user.value))
     showToast({ title: '登录成功' })
   }
 
   const logout = async () => {
     user.value = null
-    uni.removeStorageSync('user')
     showToast({ title: '退出成功' })
   }
 

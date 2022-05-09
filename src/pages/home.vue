@@ -6,6 +6,14 @@
 
   const { loggedIn, user } = useUser()
   const components = ref([{ id: 1, icon: 'grid-fill', title: '按钮组', pageUrl: '/pakeage-button/pages/index' }])
+
+  // const test = useStorage('app', null)
+  // test.value = '234234'
+  // console.log('test', test)
+  // setTimeout(() => {
+  //   test.value = null
+  //   console.log('test', test)
+  // }, 3000)
 </script>
 
 <template>

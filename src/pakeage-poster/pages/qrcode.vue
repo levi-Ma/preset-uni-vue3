@@ -7,22 +7,21 @@
 
   import { showToast } from '@/utils'
   const imgUrl = ref('')
-
+  const options = ref({
+    plugins: [drawQrCode()],
+    loading: true,
+    debug: true, // 发布为正式版时关闭该选项
+    width: 650,
+    height: 920
+  })
   onReady(async () => {
     // 创建绘制工具
-    const dp = await useDrawPoster('canvas', {
-      plugins: [drawQrCode()],
-      loading: true,
-      debug: true, // 发布为正式版时关闭该选项
-      width: 650,
-      height: 920
-    })
-    const canvas = <Canvas>dp.canvas
-    const w = canvas.width
-    const h = canvas.height
+    const dp = await useDrawPoster('canvas', options.value)
+    const w = options.value.width
+    const h = options.value.height
     // 绘制基本背景
     dp.draw((ctx) => {
-      ctx.fillStyle = '#f9f9f9'
+      ctx.fillStyle = '#ffffff'
       ctx.fillRoundRect(0, 0, w, h, 12)
       ctx.clip()
       ctx.fillStyle = '#E3712A'
@@ -101,12 +100,7 @@
       点击此处或长按图片保存到本地
     </div>
     <div style="position: fixed; top: 999999999999999999999rpx">
-      <!-- #ifdef MP-WEIXIN -->
       <canvas id="canvas" type="2d" style="width: 650px; height: 920px" />
-      <!-- #endif -->
-      <!-- #ifndef MP-WEIXIN -->
-      <canvas id="canvas" canvas-id="canvas" style="width: 650px; height: 920px" />
-      <!-- #endif -->
     </div>
   </div>
 </template>

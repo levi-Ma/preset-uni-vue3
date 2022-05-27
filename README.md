@@ -43,6 +43,10 @@ preset-uni-vue3
 └── vite.config.js # vite 脚手架配置
 ```
 
+## 更新 CLI 依赖
+
+`npx @dcloudio/uvm alpha`
+
 ## 项目规范说明
 
 项目采用`scss`，`uniapp`，`uview`，`pinia` 等主体技术进行开发项目要求组件化开发，结构化，清晰化项目结构。 请遵循代码中所定义的规范进行开发

@@ -49,7 +49,7 @@ preset-uni-vue3
 
 ## 项目规范说明
 
-项目采用`scss`，`uniapp`，`uview`，`pinia` 等主体技术进行开发项目要求组件化开发，结构化，清晰化项目结构。 请遵循代码中所定义的规范进行开发
+项目采用`scss`，`uniapp`，`vk-uview`，`pinia` 等主体技术进行开发项目要求组件化开发，结构化，清晰化项目结构。 请遵循代码中所定义的规范进行开发
 
 ### CSS 预编辑器规范
 
@@ -80,22 +80,6 @@ preset-uni-vue3
 - 减少代码圈复杂度，减少代码嵌套，善于`return`，少用`else`
 - 函数与变量命名采用驼峰命名法 `-> userInfo or getUserInfo`
 - 常量(不会再次进行修改)命名采用大写加下划线命名 `-> USER_STATUS`
-
-### pinia 规范
-
-- 规范定义 mutations-type 常量命名
-
-```markdown
-# 常量前缀采用动词, 后缀为对应的数据名称
-
-- export const RECEIVE*[DATA_NAME] = 'receive*[data_name]' -> 接收并覆盖某个数据
-- export const MODIFY*[DATA_NAME] = 'modify*[data_name]' -> 修改某个数据或数据项
-- export const DELETE*[DATA_NAME] = 'delete*[data_name]' -> 删除某个数据或数据项
-- export const UNSHIFT*[DATA_NAME_ITEM] = 'unshift*[data_name_item]' -> 向某个数据前端添加一项数据
-- export const PUSH*[DATA_NAME_ITEM] = 'push*[data_name_item]' -> 向某个数据后端添加一项数据
-```
-
-- pinia 保持数据精简, 必要时可先存 storage, 避免小程序的性能消耗过大
 
 ## 项目构建命令清单
 

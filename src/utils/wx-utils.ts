@@ -16,7 +16,7 @@ export const redirectTo = (url: string, params: WillObject = {}) => {
 export const navigateBack = (delta = 1) => {
   uni.navigateBack({ delta })
 }
-export const $uni = (uni as any) as UniApp.Uni
+export const $uni = uni as any as UniApp.Uni
 
 export const lookMap = (latitude: string | number, longitude: string | number) => {
   if (typeof latitude === 'string') latitude = Number(latitude)
@@ -35,5 +35,3 @@ export const showToast = (options: UniApp.ShowToastOptions) => {
     }, duration)
   })
 }
-
-// export const PLATFORM = typeof process !== 'undefined' ? (process?.env?.VUE_APP_PLATFORM as UniPlatforms) : undefined;

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-  import { useCounterStore } from '@/stores/counter'
-  const counterStore = useCounterStore()
-  const btnClick = () => {
-    counterStore.increment()
-  }
+const counterStore = useCounterStore()
+const btnClick = () => {
+  counterStore.increment()
+}
 </script>
 
 <template>
@@ -15,19 +14,19 @@
 </template>
 
 <style lang="scss" scoped>
-  .container {
-    padding: 20%;
+.container {
+  padding: 20%;
 
-    .pinia-num {
-      margin-bottom: 30rpx;
-      font-size: 50rpx;
-      font-weight: 700;
-      text-align: center;
-      color: #000;
-    }
-
-    .desc {
-      margin-top: 40rpx;
-    }
+  .pinia-num {
+    margin-bottom: 30rpx;
+    font-size: 50rpx;
+    font-weight: 700;
+    text-align: center;
+    color: #000;
   }
+
+  .desc {
+    margin-top: 40rpx;
+  }
+}
 </style>

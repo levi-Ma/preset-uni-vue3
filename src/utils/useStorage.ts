@@ -1,5 +1,3 @@
-import { shallowRef, unref, watch } from 'vue'
-
 export function useStorage(key: string, initialValue: any) {
   // 统一处理通过 try catch 捕获到的错误
   const onError = (e: any) => {

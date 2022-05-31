@@ -1,15 +1,8 @@
 <script lang="ts" setup>
-// 引入 api
-import { ref } from 'vue'
-
 // 引入方法
 import http from '@/apis'
-import { navigateTo } from '@/utils'
-import { useUser } from '@/composables/useUser'
-import { onLoad } from '@dcloudio/uni-app'
 
 // 引入组件
-// import mzTips from "@/components/mz-tips.vue"
 
 // 使用方法
 const { loggedIn, user } = useUser()

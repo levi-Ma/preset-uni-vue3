@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-  import { useUser } from '@/composables/useUser'
-  import { switchTab } from '@/utils'
-  const { loggedIn, user, loginModel, login, logout } = useUser()
+const { loggedIn, user, loginModel, login, logout } = useUser()
 </script>
 
 <template>
@@ -23,15 +21,15 @@
 </template>
 
 <style lang="scss" scoped>
-  .container {
-    padding: 20%;
-    .btns {
-      margin-top: 30rpx;
-    }
-
-    .tips {
-      margin-top: 30rpx;
-      text-align: center;
-    }
+.container {
+  padding: 20%;
+  .btns {
+    margin-top: 30rpx;
   }
+
+  .tips {
+    margin-top: 30rpx;
+    text-align: center;
+  }
+}
 </style>

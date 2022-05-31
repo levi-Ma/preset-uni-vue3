@@ -1,10 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-
-// 引入组件
-import MzToast from '@/components/mz-toast.vue'
-import MzTips from '@/components/mz-tips.vue'
-
 // 定义数据
 const btns = ref<btnItem[]>([
   { id: 1, type: null, text: '默认按钮' },
@@ -14,8 +8,8 @@ const btns = ref<btnItem[]>([
   { id: 5, type: 'warning', text: '警告按钮' },
   { id: 6, type: 'error', text: '危险按钮' }
 ])
-const mzTips = ref<InstanceType<typeof MzTips>>()
-const mzToast = ref<InstanceType<typeof MzToast>>()
+const mzTips = ref()
+const mzToast = ref()
 const handelShowTips = (item: btnItem) => {
   if (!item.type) {
     mzToast.value?.show({ title: `${item.text}的消息提示` })

@@ -1,7 +1,3 @@
-import { computed, ref } from 'vue'
-import { showToast } from '@/utils'
-import { useStorage } from '@/utils/useStorage'
-
 const user = useStorage('user', null)
 
 export const useUser = () => {

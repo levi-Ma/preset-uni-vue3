@@ -1,19 +1,33 @@
 <script lang="ts" setup>
-  // 引入 api
-  import { ref } from 'vue'
-  import { navigateTo } from '@/utils'
-  import { useUser } from '@/composables/useUser'
+// 引入 api
+import { ref } from 'vue'
 
-  const { loggedIn, user } = useUser()
-  const components = ref([{ id: 1, icon: 'grid-fill', title: '按钮组', pageUrl: '/pakeage-button/pages/index' }])
+// 引入方法
+import http from '@/apis'
+import { navigateTo } from '@/utils'
+import { useUser } from '@/composables/useUser'
+import { onLoad } from '@dcloudio/uni-app'
 
-  // const test = useStorage('app', null)
-  // test.value = '234234'
-  // console.log('test', test)
-  // setTimeout(() => {
-  //   test.value = null
-  //   console.log('test', test)
-  // }, 3000)
+// 引入组件
+// import mzTips from "@/components/mz-tips.vue"
+
+// 使用方法
+const { loggedIn, user } = useUser()
+
+// 定义数据
+const components = ref([{ id: 1, icon: 'grid-fill', title: '按钮组', pageUrl: '/pakeage-button/pages/index' }])
+
+// 定义页面方法
+// 加载数据
+const loadPublicCase = () => {
+  let params = {}
+  http.common.getPublicCase({ params })
+}
+
+// 最后使用页面方法
+onLoad(() => {
+  loadPublicCase
+})
 </script>
 
 <template>
@@ -34,45 +48,51 @@
 
   <view class="main-container">
     <u-cell-group>
-      <u-cell-item v-for="item in components" :icon="item.icon" :title="item.title" :key="item.id" @click="navigateTo(item.pageUrl)"></u-cell-item>
+      <u-cell-item
+        v-for="item in components"
+        :icon="item.icon"
+        :title="item.title"
+        :key="item.id"
+        @click="navigateTo(item.pageUrl)"
+      ></u-cell-item>
     </u-cell-group>
   </view>
 </template>
 
 <style lang="scss" scoped>
-  .header-container {
-    .header-wrap {
-      padding: 0 30rpx;
-      .wrap {
-        padding: 20rpx 0;
+.header-container {
+  .header-wrap {
+    padding: 0 30rpx;
+    .wrap {
+      padding: 20rpx 0;
+    }
+    .logo {
+      width: 140rpx;
+      height: 140rpx;
+    }
+    .tit-box {
+      flex: 1;
+      margin-left: 20rpx;
+      .tit {
+        font-size: 50rpx;
+        font-weight: 700;
+        color: #303030;
       }
-      .logo {
-        width: 140rpx;
-        height: 140rpx;
-      }
-      .tit-box {
-        flex: 1;
-        margin-left: 20rpx;
-        .tit {
-          font-size: 50rpx;
-          font-weight: 700;
-          color: #303030;
-        }
-        .txt {
-          font-size: 28rpx;
-          color: #909090;
-        }
-      }
-      .desc {
-        margin-top: 20rpx;
+      .txt {
         font-size: 28rpx;
-        line-height: 1.8;
-        color: #606060;
+        color: #909090;
       }
     }
+    .desc {
+      margin-top: 20rpx;
+      font-size: 28rpx;
+      line-height: 1.8;
+      color: #606060;
+    }
   }
-  .main-container {
-    padding: 0 30rpx;
-    margin-top: 60rpx;
-  }
+}
+.main-container {
+  padding: 0 30rpx;
+  margin-top: 60rpx;
+}
 </style>

@@ -25,12 +25,16 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     // 对响应数据做些什么
+    // 如果返回的响应状态码为 200, 返回 response
+    // 如果不是返回 reject(response)
     if (response.statusCode === 200) {
-      return response.data
+      return response as unknown as any
+    } else {
+      return Promise.reject(response)
     }
-    // return response
   },
   (error) => {
+    // 以下代码未实现过
     if (typeof error.config.custom?.errorhandle === 'undefined' || error.config.custom?.errorhandle)
       ERROR_STRATEGY[(error.statusCode ?? 1000) as STRATEGY_KEYS](error)
     // 对响应错误做些什么
@@ -39,4 +43,4 @@ instance.interceptors.response.use(
 )
 
 // 导出 create 创建后的实例
-export default instance
+export { instance }

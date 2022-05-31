@@ -33,6 +33,7 @@ specifiers:
   vite: ^2.9.6
   vue: ^3.2.33
   vue-i18n: ^9.1.9
+  vuex: ^4.0.2
 
 dependencies:
   '@dcloudio/uni-app': 3.0.0-alpha-3041220220523001_postcss@8.4.14+vue@3.2.36
@@ -52,6 +53,7 @@ dependencies:
   uni-ajax: 2.4.4
   vue: 3.2.36
   vue-i18n: 9.1.10_vue@3.2.36
+  vuex: 4.0.2_vue@3.2.36
 
 devDependencies:
   '@dcloudio/types': 2.6.8
@@ -4877,6 +4879,15 @@ packages:
       '@vue/runtime-dom': 3.2.36
       '@vue/server-renderer': 3.2.36_vue@3.2.36
       '@vue/shared': 3.2.36
+
+  /vuex/4.0.2_vue@3.2.36:
+    resolution: {integrity: sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
+      '@vue/devtools-api': 6.1.4
+      vue: 3.2.36
+    dev: false
 
   /wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}

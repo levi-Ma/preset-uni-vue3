@@ -1,4 +1,4 @@
-const http = {
+const httpConfig = {
   baseURL: 'https://www.example.com/api'
 }
-export default http
+export default httpConfig

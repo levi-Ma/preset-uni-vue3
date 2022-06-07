@@ -15,8 +15,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types", "@types/node"]
+    "types": ["@dcloudio/types", "@types/node", "vite-plugin-vue-definename"]
   },
   "exclude": ["node_modules", "dist", "src/uni_modules"],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "./src/*"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

@@ -8,7 +8,7 @@ type _typeObj = { [key: string]: any }
 
 type btnItem = {
   id: number
-  type: null | string
+  type: string
   text: string
 }
 

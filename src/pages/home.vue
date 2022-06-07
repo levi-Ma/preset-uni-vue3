@@ -5,21 +5,42 @@ import http from '@/apis'
 // 引入组件
 
 // 使用方法
-const { loggedIn, user } = useUser()
+const { loggedIn, login, user } = useUser()
 
 // 定义数据
 const components = ref([{ id: 1, icon: 'grid-fill', title: '按钮组', pageUrl: '/pakeage-button/pages/index' }])
 
+// 跳转页面
+const handelToPage = (url: string) => {
+  navigateTo(url)
+}
+
 // 定义页面方法
 // 加载数据
-const loadPublicCase = () => {
-  let params = {}
-  http.common.getPublicCase({ params })
+const loadPublicCase = async () => {
+  let params = {
+    custom: {
+      errorhandle: true
+    }
+  }
+  // http.common.getPublicCase({ params }
+  if (user.value) {
+    // 中断请求
+    http.common.test().abort()
+    return false
+  }
+
+  try {
+    const data = await http.common.test(params)
+    login(data.data.user)
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 // 最后使用页面方法
 onLoad(() => {
-  loadPublicCase
+  loadPublicCase()
 })
 </script>
 
@@ -46,7 +67,7 @@ onLoad(() => {
         :icon="item.icon"
         :title="item.title"
         :key="item.id"
-        @click="navigateTo(item.pageUrl)"
+        @click="handelToPage(item.pageUrl)"
       ></u-cell-item>
     </u-cell-group>
   </view>

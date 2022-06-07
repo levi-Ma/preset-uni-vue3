@@ -8,8 +8,8 @@ export const useUser = () => {
 
   const loggedIn = computed(() => user.value?.id)
 
-  const login = async () => {
-    user.value = { id: 1, username: loginModel.value.username }
+  const login = async (data: any) => {
+    user.value = data
     showToast({ title: '登录成功' })
   }
 

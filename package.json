@@ -32,7 +32,8 @@
     "build:mp-weixin": "uni build -p mp-weixin",
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
-    "build:quickapp-webview-union": "uni build -p quickapp-webview-union"
+    "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
+    "prettier:fix": "prettier --config .prettierrc.js --write .js,.vue src"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-alpha-3041220220523001",
@@ -48,6 +49,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3041220220523001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3041220220523001",
     "dayjs": "^1.11.1",
+    "jweixin-npm": "^1.6.1",
     "pinia": "^2.0.13",
     "uni-ajax": "^2.4.3",
     "unplugin-auto-import": "^0.8.6",
@@ -70,6 +72,7 @@
     "typescript": "^4.5.2",
     "u-draw-poster": "^2.5.1",
     "uniapp-cli-run": "^0.0.4",
-    "vite": "^2.9.6"
+    "vite": "^2.9.6",
+    "vite-plugin-vue-definename": "^1.0.8"
   }
 }

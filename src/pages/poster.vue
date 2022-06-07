@@ -3,6 +3,9 @@ const posters = ref([
   { id: 1, title: '基本使用', icon: 'photo', pageUrl: '/pakeage-poster/pages/index' },
   { id: 2, title: '二维码海报', icon: 'photo-fill', pageUrl: '/pakeage-poster/pages/qrcode' }
 ])
+const handelToPage = (url: string) => {
+  navigateTo(url)
+}
 </script>
 
 <template>
@@ -11,7 +14,7 @@ const posters = ref([
       <u-cell-item
         v-for="item in posters"
         :key="item.id"
-        @click="navigateTo(item.pageUrl)"
+        @click="handelToPage(item.pageUrl)"
         :icon="item.icon"
         :title="item.title"
       ></u-cell-item>

@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-  import { ref } from 'vue'
+import UTopTips from '@/uni_modules/vk-uview-ui/components/u-top-tips/u-top-tips.vue'
 
-  const uTips = ref<UTopTipsType>()
-  const show = ({ title, type = 'default', duration = 2000 }: ToastType) => {
-    uTips.value.show({
-      title,
-      type,
-      duration
-    })
-  }
-  defineExpose({
-    show
+const uTips = ref<InstanceType<typeof UTopTips>>()
+const show = ({ title, type, duration = 2000 }: ToastType) => {
+  uTips.value?.show({
+    title,
+    type,
+    duration
   })
+}
+defineExpose({
+  show
+})
 </script>
 
 <template>

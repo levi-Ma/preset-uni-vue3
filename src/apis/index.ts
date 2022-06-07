@@ -14,6 +14,12 @@ const http = {
      */
     getPublicCase(params = {}) {
       return instance.get('/api/xxxx', params)
+    },
+    /**
+     * test
+     */
+    test(params = {}) {
+      return instance.get('/api/user/getUser', params)
     }
   }
 }

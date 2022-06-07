@@ -1,6 +1,8 @@
 import ajax from 'uni-ajax'
-import httpConfig from '../common/http.config'
+import { httpConfig } from '../common/http.config'
 import { ERROR_STRATEGY, STRATEGY_KEYS } from './error.strategy'
+
+const { auth } = useAuth()
 
 // 创建请求实例
 const instance = ajax.create({
@@ -12,7 +14,7 @@ const instance = ajax.create({
 instance.interceptors.request.use(
   (config) => {
     // 判断是否有 Token 有的话请求头加入 Token。
-    const token: string = uni.getStorageSync('TOKEN')
+    const token: string = auth.value
     token && (config.header['Authorization'] = token)
     return config
   },
@@ -28,14 +30,14 @@ instance.interceptors.response.use(
     // 如果返回的响应状态码为 200, 返回 response
     // 如果不是返回 reject(response)
     if (response.statusCode === 200) {
-      return response as unknown as any
+      return response.data as unknown as any
     } else {
       return Promise.reject(response)
     }
   },
   (error) => {
-    // 以下代码未实现过
-    if (typeof error.config.custom?.errorhandle === 'undefined' || error.config.custom?.errorhandle)
+    if (error.errMsg === 'request:fail abort') return
+    if (typeof error.config.data.custom?.errorhandle === 'undefined' || error.config.data.custom?.errorhandle)
       ERROR_STRATEGY[(error.statusCode ?? 1000) as STRATEGY_KEYS](error)
     // 对响应错误做些什么
     return Promise.reject(error)
